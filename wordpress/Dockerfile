@@ -1,0 +1,6 @@
+FROM wordpress:latest
+LABEL maintainer="pat@247.ch"
+
+COPY cornerstone /usr/src/wordpress/wp-content/plugins/cornerstone
+COPY ./twentyseventeen/page.php /usr/src/wordpress/wp-content/themes/twentyseventeen 
+COPY ./twentysixteen/page.php /usr/src/wordpress/wp-content/themes/twentysixteen 
