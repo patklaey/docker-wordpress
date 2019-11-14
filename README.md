@@ -58,3 +58,15 @@ Congrats, you're done.
 * In case you see an error like "Too many redirects", point your browser to blog.yourdomain.tld/wp-admin, login and 
 check your settings (Settings -> General). What does ```WordPress Address (URL)``` and ```Site Address (URL)``` say,
 does it correspond a
+
+# Backup
+To backup your Wordpress installation you need to things: 
+1. Backup the blog-uploads directory
+    ```bash
+    rsync --verbose --archive -h /home/blog-uploads /mnt/backup/home/
+    ```
+2. Backup the mysql db
+    ```bash
+    docker exec wordpress-db sh -c "mysqldump -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DB_NAME} > /backup/wordpress-utf.sql"
+    cp -p /root/db_backup/wordpress-utf.sql /mnt/backup/wordpress-utf.sql
+    ```
