@@ -5,13 +5,14 @@ services:
      image: patklaey/mysql:5.5
      volumes:
        - db_data:/var/lib/mysql
+       - /root/db_backup:/backup
      restart: always
      container_name: wordpress-db
      environment:
-       MYSQL_ROOT_PASSWORD: somewordpress
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wordpress
-       MYSQL_PASSWORD: wordpress
+       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+       MYSQL_DATABASE: ${MYSQL_DB_NAME}
+       MYSQL_USER: ${MYSQL_USER}
+       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
    wordpress:
      depends_on:
@@ -25,8 +26,8 @@ services:
      container_name: wordpress-web
      environment:
        WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD: wordpress
-       WORDPRESS_DB_NAME: wordpress
+       WORDPRESS_DB_USER: ${MYSQL_USER}
+       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+       WORDPRESS_DB_NAME: ${MYSQL_DB_NAME}
 volumes:
     db_data: {}
