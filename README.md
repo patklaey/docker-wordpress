@@ -3,7 +3,7 @@
 This guide assumes that you have a folder `/home/blog-uploads` that stores your uploaded images on the host and not 
 within the docker image
 
-## Fresh installation
+##  Install from scratch
 
 For a fresh installation of Wordpress follow the following simple steps: 
 
@@ -12,17 +12,17 @@ For a fresh installation of Wordpress follow the following simple steps:
     git clone https://github.com/patklaey/docker-wordpress
     cd docker-wordpress 
     ```
-2. Modify the ```.env``` file to change passwords
+1. Modify the ```.env``` file to change passwords
     ```bash
     vi .env
     ```
-3. Start up the containers
+1. Start up the containers
     ```bash
     docker-compose up -d
     ```
-4. Point your browser to your blog, you should now see the Wordpress installation wizard
+1. Point your browser to your blog, you should now see the Wordpress installation wizard
 
-## Restore from backup
+## Install from existing Wordpress installation
 
 If there is an already existing installation, make sure you have your uploads copied (or mounted) to 
 `/home/blog-uploads`, then follow those steps:
@@ -32,24 +32,24 @@ If there is an already existing installation, make sure you have your uploads co
     git clone https://github.com/patklaey/docker-wordpress
     cd docker-wordpress 
     ```
-2. Modify the ```.env``` file to change passwords
+1. Modify the ```.env``` file to change passwords
     ```bash
     vi .env
     ```
-3. Start up the containers
+1. Start up the containers
     ```bash
     docker-compose up -d
     ```
-4. Copy the database backup into the mysql container
+1. Copy the database backup into the mysql container
     ```bash
     docker cp /path/to/backup/wordpress-utf.sql wordpress-db:/root
     ```
-5. Import the database backup
+1. Import the database backup
     ```bash
     source .env
     docker exec wordpress-db sh -c "mysql --default-character-set=latin1 -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DB_NAME} < /root/wordpress-utf.sql"  
     ```
-6. Point your browser to your blog, should be all fine
+1. Point your browser to your blog, should be all fine
 
 Congrats, you're done.
 
