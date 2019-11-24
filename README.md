@@ -47,7 +47,7 @@ If there is an already existing installation, make sure you have your uploads co
 5. Import the database backup
     ```bash
     source .env
-    docker exec wordpress-db sh -c "mysql -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DB_NAME} < /root/wordpress-utf.sql"  
+    docker exec wordpress-db sh -c "mysql --default-character-set=latin1 -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DB_NAME} < /root/wordpress-utf.sql"  
     ```
 6. Point your browser to your blog, should be all fine
 
