@@ -84,3 +84,17 @@ To backup your Wordpress installation you need to things:
     docker-compose up -d
     ```
 1. Point your browser to ```%your-blog%/wp-admin``` to check if the database needs an update
+
+# Nginx config
+
+The location directive to redirect from port 80/443 to your docker installation
+
+```nginx
+        location / {
+                proxy_set_header X-Real-IP  $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header Host $host;
+                proxy_pass http://127.0.0.1:8000;
+                proxy_redirect off;
+        }
+```
