@@ -49,7 +49,7 @@ If there is an already existing installation, make sure you have your uploads co
     source .env
     docker exec wordpress-db sh -c "mysql --default-character-set=latin1 -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} < /root/wordpress-utf.sql"  
     ```
-1. Point your browser to your blog, should be all fine
+1. Point your browser to ```%your-blog%/wp-admin``` to check if the database needs an update
 
 Congrats, you're done.
 
@@ -67,6 +67,20 @@ To backup your Wordpress installation you need to things:
     ```
 2. Backup the mysql db
     ```bash
-    docker exec wordpress-db sh -c "mysqldump -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} ${MYSQL_DB_NAME} > /backup/wordpress-utf.sql"
+    docker exec wordpress-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} > /backup/wordpress-utf.sql"
     cp -p /root/db_backup/wordpress-utf.sql /mnt/backup/wordpress-utf.sql
     ```
+
+# Update
+
+1. If the newest image does not yet exist, build and tag the new version of the docker Wordpress image (see 
+[wiki](http://wiki.patklaey.ch/index.php/Docker_Cheat_Sheet#Build_an_image))
+1. Bring down docker-compose (careful: do NOT specify -v to leave the volmes (database) untouched)
+    ```bash
+    docker-compose down
+    ``` 
+1. Bring docker-compose up again:
+    ```bash
+    docker-compose up -d
+    ```
+1. Point your browser to ```%your-blog%/wp-admin``` to check if the database needs an update
