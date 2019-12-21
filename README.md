@@ -73,7 +73,8 @@ To backup your Wordpress installation you need to things:
 
 # Update
 
-1. Build and tag the new version of the docker wordpress image (see [wiki](http://wiki.patklaey.ch/index.php/Docker_Cheat_Sheet#Build_an_image))
+1. If the newest image does not yet exist, build and tag the new version of the docker Wordpress image (see 
+[wiki](http://wiki.patklaey.ch/index.php/Docker_Cheat_Sheet#Build_an_image))
 1. Bring down docker-compose (careful: do NOT specify -v to leave the volmes (database) untouched)
     ```bash
     docker-compose down
