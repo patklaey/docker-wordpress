@@ -2,17 +2,19 @@ version: '3.3'
 
 services:
    db:
-     image: patklaey/mysql:5.5
+     image: webhippie/mariadb:latest
      volumes:
        - db_data:/var/lib/mysql
        - /root/db_backup:/backup
      restart: always
      container_name: wordpress-db
      environment:
-       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-       MYSQL_DATABASE: ${MYSQL_DB_NAME}
-       MYSQL_USER: ${MYSQL_USER}
-       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+       MARIADB_DATABASE: ${DB_NAME}
+       MARIADB_USERNAME: ${DB_USERNAME}
+       MARIADB_PASSWORD: ${DB_PASSWORD}
+       MARIADB_MAX_ALLOWED_PACKET: 128M
+       MARIADB_INNODB_LOG_FILE_SIZE: 64M
 
    wordpress:
      depends_on:
@@ -26,8 +28,8 @@ services:
      container_name: wordpress-web
      environment:
        WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: ${MYSQL_USER}
-       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-       WORDPRESS_DB_NAME: ${MYSQL_DB_NAME}
+       WORDPRESS_DB_USER: ${DB_USERNAME}
+       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+       WORDPRESS_DB_NAME: ${DB_NAME}
 volumes:
     db_data: {}
