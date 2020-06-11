@@ -75,10 +75,19 @@ To backup your Wordpress installation you need to things:
 
 1. If the newest image does not yet exist, build and tag the new version of the docker Wordpress image (see 
 [wiki](http://wiki.patklaey.ch/index.php/Docker_Cheat_Sheet#Build_an_image))
-1. Bring down docker-compose (careful: do NOT specify -v to leave the volmes (database) untouched)
+1. Backup the database
+    ```bash
+    source .env
+    docker exec wordpress-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} > /tmp/wordpress-utf.sql"
+    ```
+1. Bring down docker-compose (careful: do NOT specify -v to leave the volumes (database) untouched)
     ```bash
     docker-compose down
     ``` 
+1. Change the docker version in compose
+    ```bash
+    vi docker-compose.yml
+    ```
 1. Bring docker-compose up again:
     ```bash
     docker-compose up -d
@@ -90,11 +99,20 @@ To backup your Wordpress installation you need to things:
 The location directive to redirect from port 80/443 to your docker installation
 
 ```nginx
-        location / {
-                proxy_set_header X-Real-IP  $remote_addr;
-                proxy_set_header X-Forwarded-For $remote_addr;
-                proxy_set_header Host $host;
-                proxy_pass http://127.0.0.1:8000;
-                proxy_redirect off;
-        }
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name blog.patklaey.ch;
+
+    client_max_body_size 128M;
+
+    location / {
+        proxy_set_header X-Real-IP  $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        proxy_pass http://127.0.0.1:8000;
+        proxy_redirect off;
+    }
+}
 ```
