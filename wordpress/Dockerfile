@@ -1,4 +1,4 @@
-FROM wordpress:latest
+FROM wordpress:5.4.1
 LABEL maintainer="pat@247.ch"
 
 COPY cornerstone /usr/src/wordpress/wp-content/plugins/cornerstone
