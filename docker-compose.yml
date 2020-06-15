@@ -19,7 +19,7 @@ services:
    wordpress:
      depends_on:
        - db
-     image: patklaey/wordpress:5.4.2
+     image: patklaey/wordpress:5.4.2-1
      volumes:
        - /home/blog-uploads:/var/www/html/wp-content/uploads
      ports:
