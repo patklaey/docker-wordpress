@@ -23,7 +23,7 @@ get_header(); ?>
                                 $i = 0;
                                 while ( cnr_have_children() ) {
                                     cnr_next_child(); ?>
-                                    <a href="<?php the_permalink() ?>" style="text-decoration: underline; color: inherit;"><?php the_title("<h3>","</h3>")?></a>
+				    <a href="<?php the_permalink() ?>" style="text-decoration: underline; color: inherit;"><?php the_title("<h3>","</h3>");  if ( has_post_thumbnail() ) { the_post_thumbnail( 'medium_large' );   }; ?></a>
                                     <?php the_excerpt();
                                     $i++;
                                 }
