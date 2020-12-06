@@ -12,6 +12,10 @@ For a fresh installation of Wordpress follow the following simple steps:
     git clone https://github.com/patklaey/docker-wordpress
     cd docker-wordpress 
     ```
+1. Copy the env-template to your instance of ```.env```
+    ```bash
+    cp .env-template .env
+    ```
 1. Modify the ```.env``` file to change passwords
     ```bash
     vi .env
@@ -31,6 +35,10 @@ If there is an already existing installation, make sure you have your uploads co
     ```bash
     git clone https://github.com/patklaey/docker-wordpress
     cd docker-wordpress 
+    ```
+1. Copy the env-template to your instance of ```.env```
+    ```bash
+    cp .env-template .env
     ```
 1. Modify the ```.env``` file to change passwords
     ```bash
