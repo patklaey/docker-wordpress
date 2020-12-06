@@ -1,15 +1,15 @@
-FROM wordpress:5.5.0
+FROM wordpress:5.5.3
 LABEL maintainer="pat@247.ch"
 
 RUN apt-get update && apt-get install -y wget unzip
 
 WORKDIR /usr/src/wordpress/wp-content/themes
-RUN wget https://downloads.wordpress.org/theme/blossom-travel.1.0.7.zip
+RUN wget https://downloads.wordpress.org/theme/blossom-travel.1.0.8.zip
 RUN wget https://downloads.wordpress.org/theme/twentytwenty.1.5.zip
 RUN wget https://downloads.wordpress.org/theme/twentynineteen.1.7.zip
 RUN unzip -o twentytwenty.1.5.zip && rm twentytwenty.1.5.zip
 RUN unzip -o twentynineteen.1.7.zip && rm twentynineteen.1.7.zip
-RUN unzip blossom-travel.1.0.7.zip && rm blossom-travel.1.0.7.zip
+RUN unzip blossom-travel.1.0.8.zip && rm blossom-travel.1.0.8.zip
 
 WORKDIR /usr/src/wordpress/wp-content/plugins/
 RUN wget https://downloads.wordpress.org/plugin/cornerstone.zip
