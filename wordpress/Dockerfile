@@ -1,9 +1,9 @@
-FROM wordpress:5.6.0
+FROM wordpress:5.7.1
 LABEL maintainer="pat@247.ch"
 
 RUN apt-get update && apt-get install -y wget unzip
 
-ARG blossom_version=1.0.8
+ARG blossom_version=1.1.2
 
 WORKDIR /usr/src/wordpress/wp-content/themes
 RUN rm -rf ./*
