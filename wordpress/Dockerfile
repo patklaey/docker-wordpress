@@ -1,9 +1,9 @@
-FROM wordpress:5.8.0
+FROM wordpress:5.9.0
 LABEL maintainer="pat@247.ch"
 
 RUN apt-get update && apt-get install -y wget unzip
 
-ARG blossom_version=1.1.4
+ARG blossom_version=1.1.5
 
 WORKDIR /usr/src/wordpress/wp-content/themes
 RUN rm -rf ./*
@@ -22,3 +22,4 @@ WORKDIR /var/www/html
 COPY ./blossom-travel/page.php /usr/src/wordpress/wp-content/themes/blossom-travel
 
 RUN echo "upload_max_filesize = 128M\npost_max_size = 128M\nmemory_limit = 128M" > /usr/src/wordpress/php.ini
+
