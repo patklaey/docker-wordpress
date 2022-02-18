@@ -25,6 +25,8 @@ get_header(); ?>
                                     cnr_next_child(); ?>
 				    <a href="<?php the_permalink() ?>" style="text-decoration: underline; color: inherit;"><?php the_title("<h3>","</h3>");  if ( has_post_thumbnail() ) { the_post_thumbnail( 'medium_large' );   }; ?></a>
                                     <?php the_excerpt();
+				    $postId = get_the_ID();
+				    echo do_shortcode("[posts_like_dislike id=$postId]");
                                     $i++;
                                 }
                                 $currentPage = ( is_paged() ? get_query_var('paged') : 1 );
