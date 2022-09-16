@@ -1,12 +1,12 @@
-FROM wordpress:5.9.0
+FROM wordpress:6.0.2
 LABEL maintainer="pat@247.ch"
 
 RUN apt-get update && apt-get install -y wget unzip
 
-ARG blossom_version=1.1.5
-ARG like_comment_version=1.1.6
-ARG like_post_version=1.0.7
-
+ARG blossom_version=1.1.8
+ARG like_comment_version=1.1.7
+ARG like_post_version=1.0.8
+#ARG akismet_version=4.2.2
 
 WORKDIR /usr/src/wordpress/wp-content/themes
 RUN rm -rf ./*
@@ -24,8 +24,11 @@ RUN unzip comments-like-dislike.${like_comment_version}.zip && rm comments-like-
 # Like Dislike posts
 RUN wget https://downloads.wordpress.org/plugin/posts-like-dislike.${like_post_version}.zip
 RUN unzip posts-like-dislike.${like_post_version}.zip && rm posts-like-dislike.${like_post_version}.zip
+# Akismet
+#RUN wget https://downloads.wordpress.org/plugin/akismet.${akismet_version}.zip
+#RUN unzip -o akismet.${akismet_version}.zip && rm akismet.${akismet_version}.zip
 
-RUN rm -rf /usr/src/wordpress/wp-content/plugins/akismet
+#RUN rm -rf /usr/src/wordpress/wp-content/plugins/akismet
 RUN rm /usr/src/wordpress/wp-content/plugins/hello.php
 
 WORKDIR /var/www/html
