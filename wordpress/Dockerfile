@@ -1,11 +1,11 @@
-FROM wordpress:6.2.0
+FROM wordpress:6.4.2
 LABEL maintainer="pat@247.ch"
 
 RUN apt-get update && apt-get install -y wget unzip
 
-ARG blossom_version=1.1.8
-ARG like_comment_version=1.1.9
-ARG like_post_version=1.1.0
+ARG blossom_version=1.2.0
+ARG like_comment_version=1.2.1
+ARG like_post_version=1.1.2
 #ARG akismet_version=4.2.2
 
 WORKDIR /usr/src/wordpress/wp-content/themes
