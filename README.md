@@ -88,17 +88,13 @@ To backup your Wordpress installation you need to things:
     source .env
     docker exec wordpress-db sh -c "mysqldump -u ${DB_USERNAME} --password=${DB_PASSWORD} ${DB_NAME} > /backup/wordpress-utf-pre-upgrade.sql"
     ```
-1. Bring down docker-compose (careful: do NOT specify -v to leave the volumes (database) untouched)
-    ```bash
-    docker-compose down
-    ``` 
 1. Change the docker version in compose
     ```bash
     vi docker-compose.yml
     ```
 1. Bring docker-compose up again:
     ```bash
-    docker-compose up -d
+    docker-compose up -d --force-recreate && docker-compose logs -f 
     ```
 1. Point your browser to ```%your-blog%/wp-admin``` to check if the database needs an update
 
